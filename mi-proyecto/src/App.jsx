@@ -1,121 +1,104 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [role, setRole] = useState('estudiante')
+  const [rememberMe, setRememberMe] = useState(false)
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    // Aquí se manejará la autenticación en el futuro
+    console.log({ email, password, role, rememberMe })
+  }
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
+    <div className="login-container">
+      <header className="login-header">
+        <div className="logo-container">
+          {/* Logo del LiceoTecpan */}
+          <img src="" alt="LiceoTecpan Logo" className="school-logo" />
         </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+        <h1>LiceoTecpan</h1>
+        <p>Portal Educativo - Iniciar Sesión</p>
+      </header>
 
-      <div className="ticks"></div>
+      <main className="login-main">
+        <form onSubmit={handleSubmit} className="login-form">
+          <h2>Acceso al Sistema</h2>
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
+          {/* Selector de Rol */}
+          <div className="form-group">
+            <label htmlFor="role-select">Tipo de Usuario:</label>
+            <select
+              id="role-select"
+              value={role}
+              onChange={(e) => setRole(e.target.value)}
+              required
+            >
+              <option value="estudiante">Estudiante</option>
+              <option value="docente">Docente</option>
+              <option value="padre">Padre de Familia</option>
+              <option value="administrador">Administrador</option>
+            </select>
+          </div>
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
+          {/* Campo de Correo Electrónico / Usuario */}
+          <div className="form-group">
+            <label htmlFor="email-input">Correo Electrónico / Código:</label>
+            <input
+              type="email"
+              id="email-input"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="ejemplo@liceotecpan.edu.gt"
+              required
+            />
+          </div>
+
+          {/* Campo de Contraseña */}
+          <div className="form-group">
+            <label htmlFor="password-input">Contraseña:</label>
+            <input
+              type="password"
+              id="password-input"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Ingrese su contraseña"
+              required
+            />
+          </div>
+
+          {/* Opciones Adicionales */}
+          <div className="form-options">
+            <label className="remember-me">
+              <input
+                type="checkbox"
+                checked={rememberMe}
+                onChange={(e) => setRememberMe(e.target.checked)}
+              />
+              Recordarme en este dispositivo
+            </label>
+            <a href="#forgot-password" className="forgot-password-link">
+              ¿Olvidó su contraseña?
+            </a>
+          </div>
+
+          {/* Botón de Enviar */}
+          <button type="submit" className="submit-button">
+            Ingresar
+          </button>
+        </form>
+      </main>
+
+      <footer className="login-footer">
+        <p>&copy; {new Date().getFullYear()} LiceoTecpan. Todos los derechos reservados.</p>
+        <p>
+          Si tiene problemas para acceder, por favor contacte a soporte técnico en{' '}
+          <a href="mailto:soporte@liceotecpan.edu.gt">soporte@liceotecpan.edu.gt</a>
+        </p>
+      </footer>
+    </div>
   )
 }
 
